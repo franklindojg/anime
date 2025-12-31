@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Reproductor</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #111;
+      font-weight: bold;
+    }
+
+    header a {
+      color: #e50914;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    #player {
+      width: 100%;
+      height: calc(100vh - 50px);
+      border: none;
+      background: #000;
+    }
+
+    .status {
+      padding: 8px 12px;
+      font-size: 13px;
+      background: #111;
+      color: #0f0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="javascript:history.back()">←</a>
+  Reproductor
+</header>
+
+<iframe
+  id="player"
+  allow="autoplay; fullscreen"
+  allowfullscreen>
+</iframe>
+
+<div class="status" id="status">Cargando…</div>
+
+<!-- Scripts -->
+<script src="js/app.js"></script>
+<script src="js/player.js"></script>
+
+</body>
+</html>
