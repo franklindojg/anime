@@ -1,16 +1,12 @@
 [
-  {
-    "episode": "",
-    "page": "https://www.verblackclover.com/2019/12/black-clover-latino-capitulos.html",
-    "servers": []
-  },
+
   {
     "episode": 1,
     "page": "https://www.verblackclover.com/2019/12/black-clover-latino-capitulo-1.html",
     "servers": [
       {
         "name": "mega",
-        "url": "https://mega.nz/file/URQhyJCQ#JdWa-FAAyczV2GTBzwGTjOvhXXk9DCvNnZYst3c2LeY"
+        "url": "https://mega.nz/file/icNGHbwB#Wom2G00N6jwwRBXr4k_ExND-UY2ChtuPDBqeH1D_zzg"
       }
     ]
   },
@@ -1708,4 +1704,5 @@
       }
     ]
   }
+
 ]
