@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Test m3u8</title>
+  <title>Test HLS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- HLS.js -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
   <style>
@@ -21,62 +22,34 @@
       margin-top: 20px;
       background: black;
     }
-    .log {
-      margin-top: 20px;
-      text-align: left;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #222;
-      padding: 10px;
-      font-size: 13px;
-      white-space: pre-wrap;
-    }
   </style>
 </head>
 <body>
 
-<h2>Test m3u8 directo</h2>
+<h2>Test reproducción HLS</h2>
 
-<video id="video" controls></video>
-
-<div class="log" id="log"></div>
+<video id="video" controls autoplay></video>
 
 <script>
-const m3u8 = "https://be6721.rcr72.waw04.i8yz83pn.com/hls2/06/10070/6rdma94g63ih_h/master.m3u8?t=cg7Ixpt_RjseqoKPu6F6JwJy_wFemhrVK-J3LlJW7aU&s=1767489189&e=10800&f=50352970&srv=1055&asn=14754&sp=4000&p=";
+  const video = document.getElementById("video");
 
-const video = document.getElementById("video");
-const log = document.getElementById("log");
+  // 🔴 PEGA AQUÍ TU M3U8
+  const src = "https://fin-3dg-b1.i8yz83pn.com/hls2/10/10598/fj71ahuklibk_h/master.m3u8?t=fRSY2EUtb2orvntBonB0p2itOl926S2WcKtYvGd74xA&s=1767561444&e=10800&f=52991353&srv=1070&asn=14754&sp=4000&p=";
 
-function logMsg(msg) {
-  log.textContent += msg + "\n";
-  console.log(msg);
-}
-
-if (Hls.isSupported()) {
-  const hls = new Hls({
-    debug: true
-  });
-
-  hls.loadSource(m3u8);
-  hls.attachMedia(video);
-
-  hls.on(Hls.Events.MANIFEST_PARSED, () => {
-    logMsg("✔️ Manifest cargado");
-    video.play();
-  });
-
-  hls.on(Hls.Events.ERROR, (e, data) => {
-    logMsg("❌ ERROR: " + data.type + " / " + data.details);
-  });
-
-} else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-  logMsg("ℹ️ Safari nativo");
-  video.src = m3u8;
-  video.play();
-} else {
-  logMsg("❌ Navegador sin soporte HLS");
-}
+  if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    // Safari / iOS
+    video.src = src;
+  } else if (Hls.isSupported()) {
+    // Chrome / Edge / Firefox
+    const hls = new Hls({
+      enableWorker: true,
+      lowLatencyMode: false
+    });
+    hls.loadSource(src);
+    hls.attachMedia(video);
+  } else {
+    alert("Tu navegador no soporta HLS");
+  }
 </script>
 
 </body>
