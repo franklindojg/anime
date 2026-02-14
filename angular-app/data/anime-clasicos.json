@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Cowboy Bebop",
+    "genre": "Sci-Fi",
+    "year": 1998,
+    "episodes": 26,
+    "rating": 8.8,
+    "cover": "https://cdn.myanimelist.net/images/anime/4/19644.jpg",
+    "synopsis": "Un grupo de cazarrecompensas viaja por el espacio enfrentando su pasado."
+  },
+  {
+    "title": "Neon Genesis Evangelion",
+    "genre": "Mecha",
+    "year": 1995,
+    "episodes": 26,
+    "rating": 8.4,
+    "cover": "https://cdn.myanimelist.net/images/anime/1314/108941.jpg",
+    "synopsis": "Shinji pilotea un EVA para proteger a la humanidad de misteriosos ángeles."
+  },
+  {
+    "title": "Samurai Champloo",
+    "genre": "Samurái",
+    "year": 2004,
+    "episodes": 26,
+    "rating": 8.5,
+    "cover": "https://cdn.myanimelist.net/images/anime/1375/121473.jpg",
+    "synopsis": "Tres viajeros recorren el Japón feudal en busca del samurái que huele a girasoles."
+  },
+  {
+    "title": "Trigun",
+    "genre": "Acción",
+    "year": 1998,
+    "episodes": 26,
+    "rating": 8.2,
+    "cover": "https://cdn.myanimelist.net/images/anime/7/20310.jpg",
+    "synopsis": "Vash Estampida es perseguido por su fama mientras intenta evitar la violencia."
+  }
+]
