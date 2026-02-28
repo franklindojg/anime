@@ -1,34 +1,189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Test MP4</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      background: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    video {
-      width: 90%;
-      max-width: 900px;
-      margin-top: 20px;
-      background: black;
-    }
-  </style>
+<title>Cursos para Profesores</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ✅ LazyLoad -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
+
+<style>
+body{
+    font-family: system-ui;
+}
+
+.card-touch{
+    transition:.15s;
+}
+.card-touch:active{
+    transform:scale(.96);
+}
+</style>
+
 </head>
-<body>
 
-<h2>Test reproducción MP4 (Archive.org)</h2>
+<body class="bg-slate-100">
 
-<video id="video" controls autoplay playsinline>
-  <source src="https://archive.org/download/kunon-02/Kunon-02.mp4" type="video/mp4">
-  Tu navegador no soporta video HTML5.
-</video>
+<!-- HEADER -->
+<header class="bg-blue-600 text-white text-center py-4 shadow sticky top-0">
+    <h1 class="text-xl font-bold">🎬 Cursos de Inglés</h1>
+</header>
+
+<main class="max-w-6xl mx-auto p-3">
+
+    <!-- GALERIA -->
+    <div id="galeria"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+    </div>
+
+    <!-- PAGINACION -->
+    <div class="flex justify-center items-center gap-4 mt-6">
+
+        <button onclick="paginaAnterior()"
+            class="bg-white shadow px-4 py-2 rounded-lg">
+            ⬅ Anterior
+        </button>
+
+        <span id="infoPagina" class="font-semibold"></span>
+
+        <button onclick="paginaSiguiente()"
+            class="bg-white shadow px-4 py-2 rounded-lg">
+            Siguiente ➡
+        </button>
+
+    </div>
+
+</main>
+
+<script>
+
+let VIDEOS = [];
+let lazyLoadInstance;
+
+// PAGINACION
+let paginaActual = 1;
+const videosPorPagina = 12;
+
+
+// =======================
+// CARGAR JSON
+// =======================
+async function cargarVideos(){
+
+    const res = await fetch("playlist.json");
+    VIDEOS = await res.json();
+
+    renderVideos();
+}
+
+
+// =======================
+// RENDER
+// =======================
+function renderVideos(){
+
+    const galeria = document.getElementById("galeria");
+    galeria.innerHTML = "";
+
+    const inicio = (paginaActual - 1) * videosPorPagina;
+    const fin = inicio + videosPorPagina;
+
+    const videosPagina = VIDEOS.slice(inicio, fin);
+
+    videosPagina.forEach(video => {
+
+        // miniatura ligera (frame inicial)
+        const preview = video.url + "#t=1";
+
+        galeria.innerHTML += `
+        <div class="bg-white rounded-xl shadow p-2 card-touch">
+
+            <a href="${video.url}" target="_blank">
+
+                <video
+                    class="lazy w-full h-28 object-cover rounded-lg mb-2"
+                    preload="none"
+                    muted
+                    playsinline
+                    data-src="${preview}">
+                </video>
+
+                <p class="text-xs font-medium line-clamp-2">
+                    ${video.title}
+                </p>
+
+            </a>
+
+        </div>`;
+    });
+
+    activarLazy();
+    actualizarInfoPagina();
+}
+
+
+// =======================
+// LAZYLOAD
+// =======================
+function activarLazy(){
+
+    if(lazyLoadInstance){
+        lazyLoadInstance.update();
+    }else{
+        lazyLoadInstance = new LazyLoad({
+            elements_selector: ".lazy",
+            callback_enter: el => {
+                if(el.tagName === "VIDEO"){
+                    el.load();
+                }
+            }
+        });
+    }
+}
+
+
+// =======================
+// PAGINACION
+// =======================
+function paginaSiguiente(){
+
+    const total =
+        Math.ceil(VIDEOS.length / videosPorPagina);
+
+    if(paginaActual < total){
+        paginaActual++;
+        renderVideos();
+        window.scrollTo(0,0);
+    }
+}
+
+function paginaAnterior(){
+
+    if(paginaActual > 1){
+        paginaActual--;
+        renderVideos();
+        window.scrollTo(0,0);
+    }
+}
+
+function actualizarInfoPagina(){
+
+    const total =
+        Math.ceil(VIDEOS.length / videosPorPagina);
+
+    document.getElementById("infoPagina").textContent =
+        `Página ${paginaActual} de ${total}`;
+}
+
+
+// INICIAR
+cargarVideos();
+
+</script>
 
 </body>
 </html>
