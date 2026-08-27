@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="EcoStudent"
+run/main_scene="res://scenes/Main.tscn"
+
+[autoload]
+
+GameState="*res://scripts/systems/game_state.gd"
+
+[display]
+
+window/size/width=640
+window/size/height=360
+window/size/test_width=960
+window/size/test_height=540
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="World"
+2d_physics/layer_3="Trash"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+2d/snapping/use_gpu_pixel_snap=true
+environment/default_clear_color=Color( 0.85, 0.93, 0.82, 1 )
+textures/default_filter=false
+textures/default_mipmap_filter=false

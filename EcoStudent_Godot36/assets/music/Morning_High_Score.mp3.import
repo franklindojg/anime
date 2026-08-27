@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Morning_High_Score.mp3-7f5fbfcf94538d8957ed448ab7526be4.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Morning_High_Score.mp3"
+dest_files=[ "res://.import/Morning_High_Score.mp3-7f5fbfcf94538d8957ed448ab7526be4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
